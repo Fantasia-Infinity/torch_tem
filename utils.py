@@ -115,7 +115,7 @@ def make_directories():
     # Find the current run: the first run that doesn't exist yet
     while dir_check:
         # Construct new paths
-        run_path = '../Summaries/' + date + '/run' + str(run) + '/'
+        run_path = './output/' + date + '/run' + str(run) + '/'
         train_path = run_path + 'train'
         model_path = run_path + 'model'
         save_path = run_path + 'save'
@@ -140,7 +140,7 @@ def set_directories(date, run):
     # Initialise all pahts
     train_path, model_path, save_path, script_path, run_path = None, None, None, None, None
     # Find the current run: the first run that doesn't exist yet
-    run_path = '../Summaries/' + date + '/run' + str(run) + '/'
+    run_path = './output/' + date + '/run' + str(run) + '/'
     train_path = run_path + 'train'
     model_path = run_path + 'model'
     save_path = run_path + 'save'

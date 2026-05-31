@@ -22,19 +22,19 @@ np.random.seed(0)
 torch.manual_seed(0)
 
 # Create world: 4x4 grid with actions [North, East, South, West] with random policy, with 15 sensory experiences
-grid = world.World('./graphs/5x5.json', 45)
+grid = world.World('./envs/5x5.json', True)
 
 # Initalise hyperparameters for model
-params = parameters.parameters(grid)
+params = parameters.parameters()
 
 # Create lstm, to see if that learns well
 lstm = model.LSTM(params['n_x'] + params['n_actions'], 100, params['n_x'], n_a = params['n_actions'])
 
 # Create set of training worlds, as many as there are batches
-environments = [world.World('./graphs/5x5.json', 45) for batch in range(params['n_batches'])]
+environments = [world.World('./envs/5x5.json', True) for batch in range(params['batch_size'])]
 
 # Create walks on each world
-walks = [env.generate_walks(params['walk_length'], params['n_walks']) for env in environments]
+walks = [env.generate_walks(params['walk_it_max'], params['n_rollout']) for env in environments]
 
 # Create batched walks: instead of having walks separated by environment, collect them by environment
 batches = [[[[],[],[]] for l in range(params['walk_length'])] for w in range(params['n_walks'])]
